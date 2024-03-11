@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data() {
+                return {
+                    // a: {b:2},
+                    msg:'hello',
+                    // list: [1,2,3,4],
+                    // arr: [{a:1,b:2},'aa'],
+                    // err:'error'
+                }
+            },
+            template: `<div style="color:red;font-size:20px;">世界---{{msg}}</div>`
+        })
+         // 我们在这里模拟更新
+      setTimeout(() => {
+        vm.msg = 456;
+        // 此方法是刷新视图的核心
+        vm._update(vm._render());
+      }, 1000);
+      vm.$nextTick(()=>{
+        vm.msg = 999;
+        // vm.msg = 000;
+      })
+    // console.log('这里设置他的值',vm._data.list.splice(2,1))
+    // console.log('这里可以获取到值了',vm.$mount('#app'))
+    // vue初次渲染 -》 先初始化数据 -》 模板进行编译 -》 生成render函数 -》生成虚拟节点 -》 变成真实DOM -》 放到页面
+    //vue编译模板的三个方式：template,render,el(这个el必有的)
+    // 如果有template 就用这个方式渲染，否的话就render函数，最后再用el
+
+    // 自动更新
+    /**
+     * 1、数据变化，自动更新 调用这个方法vm._update(vm._render());
+     * 2、vue中的策略是：以组件为单位，给每一个组件添加一个watcher，属性变化后调用这个watcher
+     * 
+     * */ 
+    /**
+     * 实现对象收集依赖
+     * dep和watcher 关系  多对多（为了computed）
+    */
+   /**
+     * 数组收集
+     * dep和watcher 关系  多对多（为了computed）
+    */
+    </script>
+</body>
+</html>
